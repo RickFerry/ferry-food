@@ -1,8 +1,10 @@
 package br.com.ferryfood.requests.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import br.com.ferryfood.requests.models.Status;
 import br.com.ferryfood.requests.models.dtos.RequestDto;
 import br.com.ferryfood.requests.models.dtos.StatusDto;
 import br.com.ferryfood.requests.repositorys.RequestRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -43,9 +44,10 @@ public class RequestService {
     public RequestDto createRequest(RequestDto dto) {
         Request request = modelMapper.map(dto, Request.class);
 
-        request.setDateTime(LocalDateTime.now());
+        request.setDateTime(LocalDate.now());
         request.setStatus(Status.ACCOMPLISHED);
         request.getItems().forEach(item -> item.setRequest(request));
+        repository.save(request);
 
         return modelMapper.map(request, RequestDto.class);
     }
@@ -58,8 +60,8 @@ public class RequestService {
             throw new EntityNotFoundException();
         }
 
-        request.setStatus(dto.status());
-        repository.updateStatus(dto.status(), request);
+        request.setStatus(dto.getStatus());
+        repository.updateStatus(dto.getStatus(), request);
         return modelMapper.map(request, RequestDto.class);
     }
 

@@ -2,6 +2,8 @@ package br.com.ferryfood.payments.controllers;
 
 import java.net.URI;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.ferryfood.payments.models.dtos.PaymentDetailDTO;
 import br.com.ferryfood.payments.models.dtos.PaymentPersistDTO;
 import br.com.ferryfood.payments.services.PaymentService;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 
 @RestController

@@ -3,6 +3,9 @@ package br.com.ferryfood.requests.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -20,8 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.ferryfood.requests.models.dtos.RequestDto;
 import br.com.ferryfood.requests.models.dtos.StatusDto;
 import br.com.ferryfood.requests.services.RequestService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/requests")
@@ -52,15 +53,15 @@ public class RequestController {
         return String.format("Request answered by the instance running on the port %s", port);
     }
 
-    @PostMapping()
+    @PostMapping
     @Transactional
     public ResponseEntity<RequestDto> createRequest(@RequestBody @Valid RequestDto dto,
             UriComponentsBuilder uriBuilder) {
         RequestDto request = service.createRequest(dto);
 
-        URI endereco = uriBuilder.path("/requests/{id}").buildAndExpand(request.id()).toUri();
+        URI url = uriBuilder.path("/requests/{id}").buildAndExpand(request.getId()).toUri();
 
-        return ResponseEntity.created(endereco).body(request);
+        return ResponseEntity.created(url).body(request);
     }
 
     @Transactional

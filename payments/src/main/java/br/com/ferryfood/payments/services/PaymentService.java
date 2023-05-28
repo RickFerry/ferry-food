@@ -1,5 +1,7 @@
 package br.com.ferryfood.payments.services;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +11,6 @@ import br.com.ferryfood.payments.models.Payment;
 import br.com.ferryfood.payments.models.dtos.PaymentDetailDTO;
 import br.com.ferryfood.payments.models.dtos.PaymentPersistDTO;
 import br.com.ferryfood.payments.repositorys.PaymentRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -32,7 +33,7 @@ public class PaymentService {
     }
 
     public PaymentDetailDTO updatePayment(Long id, PaymentDetailDTO dto) {
-        Payment payment = paymentRepository.getReferenceById(id);
+        Payment payment = paymentRepository.getById(id);
         BeanUtils.copyProperties(dto, payment, "id");
         return new PaymentDetailDTO(paymentRepository.save(payment));
     }
