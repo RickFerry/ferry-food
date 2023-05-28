@@ -52,4 +52,10 @@ public class PaymentService {
         paymentRepository.save(p);
         paymentClient.updatepayment(id);
     }
+
+    public void changeStatus(Long id) {
+        Payment p = paymentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+        p.setStatus(Status.CONFIRMED_NO_INTEGRATION);
+        paymentRepository.save(p);
+    }
 }

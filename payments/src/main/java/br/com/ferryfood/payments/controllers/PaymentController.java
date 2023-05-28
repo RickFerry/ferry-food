@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.ferryfood.payments.models.dtos.PaymentDetailDTO;
 import br.com.ferryfood.payments.models.dtos.PaymentPersistDTO;
 import br.com.ferryfood.payments.services.PaymentService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -65,7 +66,12 @@ public class PaymentController {
     }
 
     @PatchMapping("/{id}/confirm")
+    @CircuitBreaker(name = "updateRequest", fallbackMethod = "confirmedNoIntegration")
     public void confirmPayment(@PathVariable @NotNull Long id) {
         paymentService.confirmPayment(id);
+    }
+
+    public void confirmedNoIntegration(Long id, Exception e) {
+        paymentService.changeStatus(id);
     }
 }
