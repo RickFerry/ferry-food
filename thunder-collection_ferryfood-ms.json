@@ -1,0 +1,151 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "ferryfood-ms",
+    "dateExported": "2023-05-28T18:43:14.962Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Payment",
+            "containerId": "",
+            "created": "2023-05-27T18:55:52.647Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "985753bc-f161-490d-8c1b-1ffb3258e5f3",
+            "name": "Request",
+            "containerId": "",
+            "created": "2023-05-27T18:56:13.509Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "9e789051-862b-4eb7-b21a-0217dcd37896",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Create payment",
+            "url": "localhost:8082/payments-ms/payments",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-27T02:04:11.061Z",
+            "modified": "2023-05-28T18:36:36.368Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"value\": 85,\n  \"name\": \"Ricardo\",\n  \"number\": \"023456789\",\n  \"expiration\": \"11/02\",\n  \"code\": \"123\",\n  \"orderId\": 1,\n  \"formOfPaymentId\": 1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "123d4bf5-d5f1-43fc-88bc-5c813e8dfe9e",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Delete one payment",
+            "url": "localhost:8082/payments-ms/payments/3",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2023-05-27T02:04:25.635Z",
+            "modified": "2023-05-28T17:08:54.921Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f53f6c10-4b6d-42bf-a1cf-8ffce1be27ee",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "List payments",
+            "url": "localhost:8082/payments-ms/payments",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-05-27T02:04:36.526Z",
+            "modified": "2023-05-28T17:07:22.574Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b77ef31e-2ef8-48c9-a196-004569f67c7e",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Get one payment",
+            "url": "localhost:8082/payments-ms/payments/1",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-05-27T02:04:44.972Z",
+            "modified": "2023-05-28T18:41:41.572Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0bcd7dfe-2faf-439c-88cb-d1c100616a9d",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Update payment",
+            "url": "localhost:8082/payments-ms/payments/2",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-05-27T02:04:55.694Z",
+            "modified": "2023-05-28T17:08:37.348Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"value\": 800,\n  \"name\": \"Tay\",\n  \"number\": \"023456789\",\n  \"expiration\": \"11/02\",\n  \"status\": \"CANCELED\",\n  \"orderId\": 1,\n  \"formOfPaymentId\": 1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ab2b8288-cf80-4687-938a-c7de59052500",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "985753bc-f161-490d-8c1b-1ffb3258e5f3",
+            "name": "Create request",
+            "url": "localhost:8082/requests-ms/requests",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-05-27T18:56:45.748Z",
+            "modified": "2023-05-28T17:09:23.118Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"items\": [\n    {\n      \"amount\": 10,\n      \"description\": \"Coca-cola\"\n    },\n    {\n      \"amount\": 5,\n      \"description\": \"Mc chicken\"\n    }\n  ]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3bc167ff-221c-4e92-be3f-68ae3f095e56",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "985753bc-f161-490d-8c1b-1ffb3258e5f3",
+            "name": "Get one request",
+            "url": "localhost:8082/requests-ms/requests/1",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-05-28T18:38:58.533Z",
+            "modified": "2023-05-28T18:39:16.634Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f8065ad0-846e-4ada-b4e8-552ca8a347ff",
+            "colId": "f0f24923-b632-4157-a0a9-5b087718aa9c",
+            "containerId": "acb97cb6-cf02-44f7-9311-abc8ab1a3113",
+            "name": "Confirm payment",
+            "url": "localhost:8082/payments-ms/payments/1/confirm",
+            "method": "PATCH",
+            "sortNum": 100000,
+            "created": "2023-05-28T18:40:17.708Z",
+            "modified": "2023-05-28T18:41:06.238Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

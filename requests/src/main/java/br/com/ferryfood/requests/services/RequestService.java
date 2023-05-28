@@ -43,36 +43,28 @@ public class RequestService {
 
     public RequestDto createRequest(RequestDto dto) {
         Request request = modelMapper.map(dto, Request.class);
-
         request.setDateTime(LocalDate.now());
         request.setStatus(Status.ACCOMPLISHED);
         request.getItems().forEach(item -> item.setRequest(request));
         repository.save(request);
-
         return modelMapper.map(request, RequestDto.class);
     }
 
     public RequestDto updateStatus(Long id, StatusDto dto) {
-
-        Request request = repository.porIdComItens(id);
-
+        Request request = repository.byIdWithItems(id);
         if (request == null) {
             throw new EntityNotFoundException();
         }
-
         request.setStatus(dto.getStatus());
         repository.updateStatus(dto.getStatus(), request);
         return modelMapper.map(request, RequestDto.class);
     }
 
     public void approvePaymentRequest(Long id) {
-
-        Request request = repository.porIdComItens(id);
-
+        Request request = repository.byIdWithItems(id);
         if (request == null) {
             throw new EntityNotFoundException();
         }
-
         request.setStatus(Status.PAID_OUT);
         repository.updateStatus(Status.PAID_OUT, request);
     }

@@ -15,5 +15,5 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     void updateStatus(Status status, Request request);
 
     @Query(value = "SELECT p from Request p LEFT JOIN FETCH p.items where p.id = :id")
-    Request porIdComItens(Long id);
+    Request byIdWithItems(Long id);
 }
