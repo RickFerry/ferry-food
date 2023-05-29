@@ -48,6 +48,6 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 
 Projeto desenvolvido em formação [Alura](https://www.alura.com.br) e utilizado nos cursos de Spring Boot.
 
-Desenvolvedor: [Ricardo Ferreira Martins](https://www.linkedin.com/in/ricardo-ferreira-martins-9a688214b/) 
+LinkedIn: [Ricardo Ferreira Martins](https://www.linkedin.com/in/ricardo-ferreira-martins-9a688214b/) 
 
 ---
