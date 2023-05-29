@@ -30,7 +30,7 @@ A documentação das funcionalidades da aplicação pode ser acessada neste link
 As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do projeto:
 
 - **[Java 17](https://www.oracle.com/java)**
-- **[Spring Boot 2](https://spring.io/projects/spring-boot)**
+- **[Spring Boot 2.6.7](https://spring.io/projects/spring-boot)**
 - **[Maven](https://maven.apache.org)**
 - **[H2](https://www.h2database.com/html/main.html)**
 - **[Jpa](https://spring.io/projects/spring-data-jpa)**
