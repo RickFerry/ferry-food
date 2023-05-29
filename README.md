@@ -40,7 +40,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 - **[OpenFeign](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/)**
 - **[Eureka Client](https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html)**
 - **[Eureka Server](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-eureka-server.html)**
-- **[Gateway zull](https://spring.io/projects/spring-cloud-gateway)**
+- **[Gateway](https://spring.io/projects/spring-cloud-gateway)**
 
 ---
 
