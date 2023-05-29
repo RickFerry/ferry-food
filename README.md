@@ -43,8 +43,8 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 
 ## 📝 Licença
 
-Projeto desenvolvido por [Alura](https://www.alura.com.br) e utilizado nos cursos de Spring Boot.
+Projeto desenvolvido em formação [Alura](https://www.alura.com.br) e utilizado nos cursos de Spring Boot.
 
-Instrutor: [Rodrigo Ferreira](https://cursos.alura.com.br/user/rodrigo-ferreira) 
+Desenvolvedor: [Ricardo Ferreira Martins](https://www.linkedin.com/in/ricardo-ferreira-martins-9a688214b/) 
 
 ---
