@@ -32,11 +32,11 @@ As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do proj
 - **[Java 17](https://www.oracle.com/java)**
 - **[Spring Boot 2](https://spring.io/projects/spring-boot)**
 - **[Maven](https://maven.apache.org)**
-- **[H2]([https://www.mysql.com](https://www.h2database.com/html/main.html))**
-- **[Jpa]([https://hibernate.org](https://spring.io/projects/spring-data-jpa))**
+- **[H2](https://www.h2database.com/html/main.html)**
+- **[Jpa](https://spring.io/projects/spring-data-jpa)**
 - **[Flyway](https://flywaydb.org)**
 - **[Lombok](https://projectlombok.org)**
-- **[Model Mapper]([https://projectlombok.org](http://modelmapper.org/))**
+- **[Model Mapper](http://modelmapper.org/)**
 
 ---
 
