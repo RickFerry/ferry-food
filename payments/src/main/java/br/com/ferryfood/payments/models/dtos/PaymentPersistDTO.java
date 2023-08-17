@@ -16,8 +16,12 @@ public record PaymentPersistDTO(
         Long orderId,
         Long formOfPaymentId) {
 
-    public PaymentPersistDTO(Payment p) {
-        this(p.getId(), p.getValue(), p.getName(), p.getNumber(), p.getExpiration(), p.getCode(), p.getStatus(),
+    /**
+     * @param p
+     */
+    public PaymentPersistDTO(final Payment p) {
+        this(p.getId(), p.getValue(), p.getName(), p.getNumber(),
+                p.getExpiration(), p.getCode(), p.getStatus(),
                 p.getOrderId(), p.getFormOfPaymentId());
     }
 }

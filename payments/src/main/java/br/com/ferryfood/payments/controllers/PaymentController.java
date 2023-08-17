@@ -31,47 +31,90 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/payments")
 public class PaymentController {
 
+    /**
+     *
+     */
+    private static final int N10 = 10;
+    /**
+     *
+     */
     private PaymentService paymentService;
 
+    /**
+     * @param page
+     * @return Payment
+     */
     @GetMapping
-    public ResponseEntity<Page<PaymentDetailDTO>> getAllPayments(@PageableDefault(size = 10) Pageable page) {
+    public final ResponseEntity<Page<PaymentDetailDTO>> getAllPayments(
+            @PageableDefault(size = N10) final Pageable page) {
         return ResponseEntity.ok(paymentService.getAllPayments(page));
     }
 
+    /**
+     * @param id
+     * @return Payment
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentDetailDTO> getOnePayment(@PathVariable @NotNull Long id) {
+    public final ResponseEntity<PaymentDetailDTO> getOnePayment(
+            @PathVariable @NotNull final Long id) {
         return ResponseEntity.ok(paymentService.getOnePayment(id));
     }
 
+    /**
+     * @param dto
+     * @param uri
+     * @return Dto
+     */
     @PostMapping
     @Transactional
-    public ResponseEntity<PaymentPersistDTO> savePayment(@RequestBody PaymentPersistDTO dto, UriComponentsBuilder uri) {
+    public final ResponseEntity<PaymentPersistDTO> savePayment(
+            @RequestBody final PaymentPersistDTO dto,
+            final UriComponentsBuilder uri) {
         PaymentPersistDTO p = paymentService.savePayment(dto);
         URI url = uri.path("/payments/{id}").buildAndExpand(p.id()).toUri();
         return ResponseEntity.created(url).body(p);
     }
 
+    /**
+     * @param id
+     * @param dto
+     * @return Payment
+     */
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity<PaymentDetailDTO> updatePayment(@PathVariable @NotNull Long id,
-            @RequestBody PaymentDetailDTO dto) {
+    public final ResponseEntity<PaymentDetailDTO> updatePayment(
+            @PathVariable @NotNull final Long id,
+            @RequestBody final PaymentDetailDTO dto) {
         return ResponseEntity.ok(paymentService.updatePayment(id, dto));
     }
 
+    /**
+     * @param id
+     * @return Null
+     */
     @Transactional
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePayment(@PathVariable @NotNull Long id) {
+    public final ResponseEntity<Void> deletePayment(
+            @PathVariable @NotNull final Long id) {
         paymentService.deletePayment(id);
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * @param id
+     */
     @PatchMapping("/{id}/confirm")
-    @CircuitBreaker(name = "updateRequest", fallbackMethod = "confirmedNoIntegration")
-    public void confirmPayment(@PathVariable @NotNull Long id) {
+    @CircuitBreaker(name = "updateRequest",
+        fallbackMethod = "confirmedNoIntegration")
+    public final void confirmPayment(@PathVariable @NotNull final Long id) {
         paymentService.confirmPayment(id);
     }
 
-    public void confirmedNoIntegration(Long id, Exception e) {
-        paymentService.changeStatus(id);
+    /**
+     * @param id
+     * @param e
+     */
+    public final void confirmedNoIntegration(final Long id, final Exception e) {
+        paymentService.changeStatus(id, e);
     }
 }

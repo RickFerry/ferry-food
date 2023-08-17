@@ -14,8 +14,12 @@ public record PaymentDetailDTO(
         Long orderId,
         Long formOfPaymentId) {
 
-    public PaymentDetailDTO(Payment p) {
-        this(p.getId(), p.getValue(), p.getName(), p.getNumber(), p.getExpiration(), p.getStatus().toString(), p.getOrderId(),
-                p.getFormOfPaymentId());
+    /**
+     * @param p
+     */
+    public PaymentDetailDTO(final Payment p) {
+        this(p.getId(), p.getValue(), p.getName(), p.getNumber(),
+                p.getExpiration(), p.getStatus().toString(),
+                p.getOrderId(), p.getFormOfPaymentId());
     }
 }

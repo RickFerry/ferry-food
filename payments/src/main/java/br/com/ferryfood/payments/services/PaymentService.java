@@ -19,42 +19,85 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PaymentService {
 
+    /**
+     *
+     */
+    private static final String ENTITY_NOT_FOUND = "Entity not found!";
+    /**
+     *
+     */
     private PaymentRepository paymentRepository;
+    /**
+     *
+     */
     private PaymentClient paymentClient;
 
-    public Page<PaymentDetailDTO> getAllPayments(Pageable pageable) {
+    /**
+     * @param pageable
+     * @return All
+     */
+    public final Page<PaymentDetailDTO> getAllPayments(
+            final Pageable pageable) {
         return paymentRepository.findAll(pageable).map(PaymentDetailDTO::new);
     }
 
-    public PaymentDetailDTO getOnePayment(Long id) {
-        Payment p = paymentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+    /**
+     * @param id
+     * @return Payment
+     */
+    public final PaymentDetailDTO getOnePayment(final Long id) {
+        Payment p = paymentRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY_NOT_FOUND));
         return new PaymentDetailDTO(p);
     }
 
-    public PaymentPersistDTO savePayment(PaymentPersistDTO dto) {
+    /**
+     * @param dto
+     * @return Dto
+     */
+    public final PaymentPersistDTO savePayment(final PaymentPersistDTO dto) {
         return new PaymentPersistDTO(paymentRepository.save(new Payment(dto)));
     }
 
-    public PaymentDetailDTO updatePayment(Long id, PaymentDetailDTO dto) {
+    /**
+     * @param id
+     * @param dto
+     * @return Dto
+     */
+    public final PaymentDetailDTO updatePayment(
+            final Long id, final PaymentDetailDTO dto) {
         Payment payment = paymentRepository.getById(id);
         BeanUtils.copyProperties(dto, payment, "id");
         return new PaymentDetailDTO(paymentRepository.save(payment));
     }
 
-    public void deletePayment(Long id) {
-        Payment p = paymentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+    /**
+     * @param id
+     */
+    public final void deletePayment(final Long id) {
+        Payment p = paymentRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY_NOT_FOUND));
         paymentRepository.delete(p);
     }
 
-    public void confirmPayment(Long id) {
-        Payment p = paymentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+    /**
+     * @param id
+     */
+    public final void confirmPayment(final Long id) {
+        Payment p = paymentRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY_NOT_FOUND));
         p.setStatus(Status.CONFIRMED);
         paymentRepository.save(p);
         paymentClient.updatepayment(id);
     }
 
-    public void changeStatus(Long id) {
-        Payment p = paymentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+    /**
+     * @param id
+     * @param e
+     */
+    public final void changeStatus(final Long id, final Exception e) {
+        Payment p = paymentRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(ENTITY_NOT_FOUND));
         p.setStatus(Status.CONFIRMED_NO_INTEGRATION);
         paymentRepository.save(p);
     }

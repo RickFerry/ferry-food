@@ -12,17 +12,18 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     @Bean
-    Queue createQueue() {
+    final Queue createQueue() {
         return new Queue("finish.payment", false);
     }
 
     @Bean
-    RabbitAdmin createRabbitAdmin(ConnectionFactory conn) {
+    final RabbitAdmin createRabbitAdmin(final ConnectionFactory conn) {
         return new RabbitAdmin(conn);
     }
 
     @Bean
-    ApplicationListener<ApplicationReadyEvent> starterAdmin(RabbitAdmin admin) {
+    final ApplicationListener<ApplicationReadyEvent> starterAdmin(
+            final RabbitAdmin admin) {
         return event -> admin.initialize();
     }
 }
