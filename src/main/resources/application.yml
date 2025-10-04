@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ferry-food
+  jpa:
+#    show_sql: true
+    database: MYSQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+        format_sql: true
+        show_sql: true
+      #      javax:
+      #        persistence:
+      #          schema-generation.scripts.action: create
+      #          schema-generation.scripts.create-target: src/main/resources/import.sql
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/zendb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+      minimum-idle: 3
