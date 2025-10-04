@@ -31,8 +31,6 @@ public class App {
 
         log.warn(cadastroCozinha.atualizarCozinha(Cozinha.builder().nome("Cubana").build(), 1L).toString());
 
-        cadastroCozinha.removerCozinha(2L);
-        log.warn(cadastroCozinha.listarCozinhas().toString());
 
         RestauranteRepository cadastroRestaurante = run.getBean(RestauranteRepository.class);
         log.warn(cadastroRestaurante.listarRestaurantes().toString());
@@ -50,5 +48,8 @@ public class App {
 
         cadastroRestaurante.remover(2L);
         log.warn(cadastroRestaurante.listarRestaurantes().toString());
+
+        cadastroCozinha.removerCozinha(2L);
+        log.warn(cadastroCozinha.listarCozinhas().toString());
     }
 }

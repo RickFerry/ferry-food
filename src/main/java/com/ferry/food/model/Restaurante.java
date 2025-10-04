@@ -2,10 +2,7 @@ package com.ferry.food.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -23,4 +20,7 @@ public class Restaurante {
     private Long id;
     private String nome;
     private BigDecimal taxaFrete;
+
+    @ManyToOne
+    private Cozinha cozinha;
 }
