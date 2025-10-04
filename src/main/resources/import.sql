@@ -8,3 +8,14 @@ INSERT INTO cozinha (nome) VALUES ('Francesa');
 INSERT INTO cozinha (nome) VALUES ('Tailandesa');
 INSERT INTO cozinha (nome) VALUES ('Mediterrânea');
 INSERT INTO cozinha (nome) VALUES ('Espanhola');
+
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Pasta Bella', 5.00);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Taco Loco', 3.50);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Sushi World', 7.00);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Churrascaria Brasil', 4.00);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Curry House', 6.00);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Dragon Palace', 5.50);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Le Gourmet', 8.00);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Thai Spice', 4.50);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Mediterranean Delight', 6.50);
+INSERT INTO restaurante (nome, taxa_frete) VALUES ('Tapas Bar', 3.00);

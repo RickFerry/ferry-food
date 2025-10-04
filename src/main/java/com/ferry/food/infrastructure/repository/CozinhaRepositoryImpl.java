@@ -1,6 +1,7 @@
-package com.ferry.food.jpa;
+package com.ferry.food.infrastructure.repository;
 
 import com.ferry.food.model.Cozinha;
+import com.ferry.food.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,33 +10,38 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Cozinha> listarCozinhas(){
+    @Override
+    public List<Cozinha> listarCozinhas() {
         return em.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
 
-    public Cozinha buscarCozinha(Long id){
+    @Override
+    public Cozinha buscarCozinha(Long id) {
         return em.find(Cozinha.class, id);
     }
 
+    @Override
     @Transactional
-    public Cozinha adicionarCozinha(Cozinha cozinha){
+    public Cozinha adicionarCozinha(Cozinha cozinha) {
         return em.merge(cozinha);
     }
 
+    @Override
     @Transactional
-    public void removerCozinha(Long id){
+    public void removerCozinha(Long id) {
         Cozinha cozinha = buscarCozinha(id);
         if (cozinha != null) {
             em.remove(cozinha);
         }
     }
 
+    @Override
     @Transactional
-    public Cozinha atualizarCozinha(Cozinha cozinha, Long id){
+    public Cozinha atualizarCozinha(Cozinha cozinha, Long id) {
         Cozinha cozinhaAtual = buscarCozinha(id);
         if (cozinhaAtual != null) {
             cozinha.setId(cozinhaAtual.getId());
