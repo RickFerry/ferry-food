@@ -17,7 +17,7 @@ spring:
       #          schema-generation.scripts.create-target: src/main/resources/import.sql
     open-in-view: false
   datasource:
-    url: jdbc:mysql://localhost:3306/zendb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/zendb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC}
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
