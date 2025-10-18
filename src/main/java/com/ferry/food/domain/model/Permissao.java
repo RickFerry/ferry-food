@@ -1,8 +1,11 @@
-package com.ferry.food.model;
+package com.ferry.food.domain.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -12,13 +15,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cidade {
+public class Permissao {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-
-    @ManyToOne
-    private Estado estado;
+    private String descricao;
 }

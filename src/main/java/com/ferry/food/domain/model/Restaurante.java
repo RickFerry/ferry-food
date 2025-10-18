@@ -1,11 +1,9 @@
-package com.ferry.food.model;
+package com.ferry.food.domain.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -15,10 +13,14 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FormaPagamento {
+public class Restaurante {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
+    private String nome;
+    private BigDecimal taxaFrete;
+
+    @ManyToOne
+    private Cozinha cozinha;
 }

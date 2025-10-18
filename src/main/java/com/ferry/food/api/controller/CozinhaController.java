@@ -1,18 +1,17 @@
-package com.ferry.food.controller;
+package com.ferry.food.api.controller;
 
-import com.ferry.food.model.Cozinha;
-import com.ferry.food.repository.CozinhaRepository;
-import com.ferry.food.service.CozinhaService;
+import com.ferry.food.api.service.CozinhaService;
+import com.ferry.food.domain.exception.EntityInUseException;
+import com.ferry.food.domain.exception.MyEntityNotFoundException;
+import com.ferry.food.domain.model.Cozinha;
+import com.ferry.food.domain.repository.CozinhaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-
-import static org.springframework.beans.BeanUtils.copyProperties;
 
 @RestController
 @RequiredArgsConstructor
@@ -54,13 +53,12 @@ public class CozinhaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remover(@PathVariable Long id) {
         try {
-            Object retorno = cozinhaService.deletar(id);
-            if (retorno == null) {
-                return ResponseEntity.notFound().build();
-            }
+            cozinhaService.deletar(id);
             return ResponseEntity.noContent().build();
-        } catch (DataIntegrityViolationException e) {
+        } catch (EntityInUseException e) {
             return ResponseEntity.status(409).body(e.getMessage());
+        } catch (MyEntityNotFoundException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 }

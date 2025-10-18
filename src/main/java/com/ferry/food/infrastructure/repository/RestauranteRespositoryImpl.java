@@ -1,7 +1,7 @@
 package com.ferry.food.infrastructure.repository;
 
-import com.ferry.food.model.Restaurante;
-import com.ferry.food.repository.RestauranteRepository;
+import com.ferry.food.domain.model.Restaurante;
+import com.ferry.food.domain.repository.RestauranteRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

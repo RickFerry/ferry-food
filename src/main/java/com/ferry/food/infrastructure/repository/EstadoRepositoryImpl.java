@@ -1,7 +1,7 @@
 package com.ferry.food.infrastructure.repository;
 
-import com.ferry.food.model.Estado;
-import com.ferry.food.repository.EstadoRepository;
+import com.ferry.food.domain.model.Estado;
+import com.ferry.food.domain.repository.EstadoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

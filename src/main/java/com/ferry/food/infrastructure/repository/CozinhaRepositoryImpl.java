@@ -1,7 +1,7 @@
 package com.ferry.food.infrastructure.repository;
 
-import com.ferry.food.model.Cozinha;
-import com.ferry.food.repository.CozinhaRepository;
+import com.ferry.food.domain.model.Cozinha;
+import com.ferry.food.domain.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

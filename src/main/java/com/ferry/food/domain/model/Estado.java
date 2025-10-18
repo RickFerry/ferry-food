@@ -1,9 +1,11 @@
-package com.ferry.food.model;
+package com.ferry.food.domain.model;
 
 import lombok.*;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -13,14 +15,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Restaurante {
+public class Estado {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private BigDecimal taxaFrete;
-
-    @ManyToOne
-    private Cozinha cozinha;
 }

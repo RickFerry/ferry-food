@@ -1,6 +1,6 @@
-package com.ferry.food.repository;
+package com.ferry.food.domain.repository;
 
-import com.ferry.food.model.Cozinha;
+import com.ferry.food.domain.model.Cozinha;
 
 import java.util.List;
 

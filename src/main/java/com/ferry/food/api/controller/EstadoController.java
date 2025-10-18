@@ -1,7 +1,7 @@
-package com.ferry.food.controller;
+package com.ferry.food.api.controller;
 
-import com.ferry.food.model.Estado;
-import com.ferry.food.repository.EstadoRepository;
+import com.ferry.food.domain.model.Estado;
+import com.ferry.food.domain.repository.EstadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

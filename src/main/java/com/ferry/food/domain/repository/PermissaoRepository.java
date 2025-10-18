@@ -1,6 +1,6 @@
-package com.ferry.food.repository;
+package com.ferry.food.domain.repository;
 
-import com.ferry.food.model.FormaPagamento;
+import com.ferry.food.domain.model.FormaPagamento;
 
 import java.util.List;
 

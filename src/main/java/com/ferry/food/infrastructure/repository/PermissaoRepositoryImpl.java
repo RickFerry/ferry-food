@@ -1,7 +1,7 @@
 package com.ferry.food.infrastructure.repository;
 
-import com.ferry.food.model.FormaPagamento;
-import com.ferry.food.repository.PermissaoRepository;
+import com.ferry.food.domain.model.FormaPagamento;
+import com.ferry.food.domain.repository.PermissaoRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

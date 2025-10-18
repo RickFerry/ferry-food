@@ -1,4 +1,4 @@
-package com.ferry.food.model;
+package com.ferry.food.domain.model;
 
 import lombok.*;
 
@@ -10,12 +10,12 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-@Builder
 @ToString
+@Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Estado {
+public class Cozinha {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)

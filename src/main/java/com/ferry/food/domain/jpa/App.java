@@ -1,10 +1,10 @@
-package com.ferry.food.jpa;
+package com.ferry.food.domain.jpa;
 
 import com.ferry.food.Application;
-import com.ferry.food.model.Cozinha;
-import com.ferry.food.model.Restaurante;
-import com.ferry.food.repository.CozinhaRepository;
-import com.ferry.food.repository.RestauranteRepository;
+import com.ferry.food.domain.model.Cozinha;
+import com.ferry.food.domain.model.Restaurante;
+import com.ferry.food.domain.repository.CozinhaRepository;
+import com.ferry.food.domain.repository.RestauranteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
