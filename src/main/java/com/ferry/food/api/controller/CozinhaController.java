@@ -4,7 +4,6 @@ import com.ferry.food.api.service.CozinhaService;
 import com.ferry.food.domain.exception.EntityInUseException;
 import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Cozinha;
-import com.ferry.food.domain.repository.CozinhaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/cozinhas")
 public class CozinhaController {
-    private final CozinhaRepository cozinhaRepository;
     private final CozinhaService cozinhaService;
 
     @GetMapping
