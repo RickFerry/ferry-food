@@ -1,6 +1,7 @@
 package com.ferry.food.api.controller;
 
 import com.ferry.food.api.service.EstadoService;
+import com.ferry.food.domain.exception.EntityInUseException;
 import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Estado;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class EstadoController {
         Estado estadoSalvo = estadoService.salvar(estado);
         return ResponseEntity
                 .created(builder.path("/{id}")
-                .buildAndExpand(estadoSalvo.getId()).toUri())
+                        .buildAndExpand(estadoSalvo.getId()).toUri())
                 .body(estadoSalvo);
     }
 
@@ -58,6 +59,8 @@ public class EstadoController {
             return ResponseEntity.noContent().build();
         } catch (MyEntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (EntityInUseException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 }

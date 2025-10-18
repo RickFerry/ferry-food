@@ -6,7 +6,6 @@ import com.ferry.food.domain.model.Restaurante;
 import com.ferry.food.domain.repository.CozinhaRepository;
 import com.ferry.food.domain.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
