@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static java.lang.String.format;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 @RequiredArgsConstructor
@@ -59,7 +60,7 @@ public class CidadeService {
                 throw new MyEntityNotFoundException(
                         format("Estado de código %d não encontrado", estadoId));
             }
-            BeanUtils.copyProperties(cidade, cidadeAtual, "id", "estado");
+            copyProperties(cidade, cidadeAtual, "id", "estado");
             cidadeAtual.setEstado(estado);
             return cidadeRepository.adicionarCidade(cidadeAtual);
         }
