@@ -1,15 +1,14 @@
 package com.ferry.food.api.controller;
 
+import com.ferry.food.api.service.RestauranteService;
 import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Restaurante;
-import com.ferry.food.api.service.RestauranteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +60,7 @@ public class RestauranteController {
         try {
             return ResponseEntity.ok(restauranteService.atualizarParcial(id, campos));
         } catch (MyEntityNotFoundException | IllegalStateException e) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

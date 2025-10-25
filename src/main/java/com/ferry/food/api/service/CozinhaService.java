@@ -9,8 +9,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -20,10 +18,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Service
 @RequiredArgsConstructor
 public class CozinhaService {
-    private static final CozinhaRepository cozinhaRepository = null;
-
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final CozinhaRepository cozinhaRepository;
 
     @Transactional(readOnly = true)
     public List<Cozinha> listar() {
@@ -65,7 +60,7 @@ public class CozinhaService {
         );
     }
 
-    public static Cozinha getCozinhaOrElseThrow(Long id) {
+    public Cozinha getCozinhaOrElseThrow(Long id) {
         return cozinhaRepository.findById(id).orElseThrow(() ->
                 new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id)));
     }

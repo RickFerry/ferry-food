@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Cozinha;
 import com.ferry.food.domain.model.Restaurante;
-import com.ferry.food.domain.repository.CozinhaRepository;
 import com.ferry.food.domain.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
-import static com.ferry.food.api.service.CozinhaService.getCozinhaOrElseThrow;
 import static java.lang.String.format;
 import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.util.ReflectionUtils.*;
@@ -23,7 +21,7 @@ import static org.springframework.util.ReflectionUtils.*;
 @Service
 @RequiredArgsConstructor
 public class RestauranteService {
-    private final CozinhaRepository cozinhaRepository;
+    private final CozinhaService cozinhaService;
     private final RestauranteRepository restauranteRepository;
 
     @Transactional(readOnly = true)
@@ -38,7 +36,7 @@ public class RestauranteService {
 
     @Transactional
     public Restaurante salvar(Restaurante restaurante) {
-        Cozinha cozinha = getCozinhaOrElseThrow(restaurante.getCozinha().getId());
+        Cozinha cozinha = cozinhaService.getCozinhaOrElseThrow(restaurante.getCozinha().getId());
         restaurante.setCozinha(cozinha);
         return restauranteRepository.saveAndFlush(restaurante);
     }
@@ -46,11 +44,16 @@ public class RestauranteService {
     @Transactional
     public Restaurante atualizar(Long id, Restaurante restaurante) {
         Restaurante restauranteAtual = getRestauranteOrElseThrow(id);
-        Cozinha cozinha = getCozinhaOrElseThrow(restauranteAtual.getCozinha().getId());
 
-        copyProperties(restaurante, restauranteAtual, "id", "cozinha");
-        restauranteAtual.setCozinha(cozinha);
-        return restauranteAtual;
+        if (restaurante.getCozinha() != null && restaurante.getCozinha().getId() != null) {
+            Cozinha cozinha = cozinhaService.getCozinhaOrElseThrow(restaurante.getCozinha().getId());
+            copyProperties(restaurante, restauranteAtual, "id", "cozinha");
+            restauranteAtual.setCozinha(cozinha);
+        } else {
+            copyProperties(restaurante, restauranteAtual, "id", "cozinha");
+        }
+
+        return restauranteRepository.saveAndFlush(restauranteAtual);
     }
 
     @Transactional
