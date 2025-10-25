@@ -20,55 +20,53 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Service
 @RequiredArgsConstructor
 public class CozinhaService {
-    private final CozinhaRepository cozinhaRepository;
+    private static final CozinhaRepository cozinhaRepository = null;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional(readOnly = true)
     public List<Cozinha> listar() {
-        return cozinhaRepository.listarCozinhas();
+        return cozinhaRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Cozinha buscarPorId(Long id) {
-        Cozinha cozinha = getCozinhaOrNull(id);
-        if (cozinha != null) {
-            return cozinha;
-        }
-        throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
+        return getCozinhaOrElseThrow(id);
     }
 
     @Transactional
     public Cozinha adicionar(Cozinha cozinha) {
-        return cozinhaRepository.adicionarCozinha(cozinha);
+        return cozinhaRepository.saveAndFlush(cozinha);
     }
 
     @Transactional
     public Cozinha atualizar(Long id, Cozinha cozinha) {
-        Cozinha cozinhaAtual = getCozinhaOrNull(id);
-        if (cozinhaAtual != null) {
-            copyProperties(cozinha, cozinhaAtual, "id");
-            return cozinhaAtual;
-        }
-        throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
+        Cozinha cozinhaAtual = getCozinhaOrElseThrow(id);
+        copyProperties(cozinha, cozinhaAtual, "id");
+        return cozinhaAtual;
     }
 
     @Transactional
     public void deletar(Long id) {
-        Cozinha cozinha = getCozinhaOrNull(id);
-        if (cozinha != null) {
-            try {
-                cozinhaRepository.removerCozinha(cozinha.getId());
-                entityManager.flush();
-            } catch (DataIntegrityViolationException | PersistenceException e) {
-                throw new EntityInUseException(format(
-                        "Cozinha de código %d não pode ser removida, pois está em uso", id));
-            }
-        }
-        throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
+        cozinhaRepository.findById(id).ifPresentOrElse(
+                cozinha -> {
+                    try {
+                        cozinhaRepository.delete(cozinha);
+                        cozinhaRepository.flush();
+                    } catch (DataIntegrityViolationException | PersistenceException e) {
+                        throw new EntityInUseException(format(
+                                "Cozinha de código %d não pode ser removida, pois está em uso", id));
+                    }
+                },
+                () -> {
+                    throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
+                }
+        );
     }
 
-    private Cozinha getCozinhaOrNull(Long id) {
-        return cozinhaRepository.buscarCozinha(id);
+    public static Cozinha getCozinhaOrElseThrow(Long id) {
+        return cozinhaRepository.findById(id).orElseThrow(() ->
+                new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id)));
     }
 }

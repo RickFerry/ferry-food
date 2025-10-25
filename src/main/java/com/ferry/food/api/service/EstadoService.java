@@ -21,54 +21,52 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @RequiredArgsConstructor
 public class EstadoService {
     private final EstadoRepository estadoRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional(readOnly = true)
     public List<Estado> listar() {
-        return estadoRepository.listarEstados();
+        return estadoRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Estado buscarPorId(Long id) {
-        Estado estado = getEstadoAtualOrNull(id);
-        if (estado != null) {
-            return estado;
-        }
-        throw new MyEntityNotFoundException(format("Estado de código %d não encontrado", id));
+        return getOrElseThrow(id);
     }
 
     @Transactional
     public Estado salvar(Estado estado) {
-        return estadoRepository.adicionarEstado(estado);
+        return estadoRepository.saveAndFlush(estado);
     }
 
     @Transactional
     public Estado atualizar(Long id, Estado estado) {
-        Estado estadoAtual = getEstadoAtualOrNull(id);
-        if (estadoAtual != null) {
-            copyProperties(estado, estadoAtual, "id");
-            return estadoRepository.adicionarEstado(estadoAtual);
-        }
-        throw new MyEntityNotFoundException(format("Estado de código %d não encontrado", id));
+        Estado estadoAtual = getOrElseThrow(id);
+        copyProperties(estado, estadoAtual, "id");
+        return estadoRepository.save(estadoAtual);
     }
 
     @Transactional
     public void deletar(Long id) {
-        Estado estado = getEstadoAtualOrNull(id);
-        if (estado != null) {
-            try {
-                estadoRepository.removerEstado(estado.getId());
-                entityManager.flush();
-            } catch (DataIntegrityViolationException | PersistenceException e) {
-                throw new EntityInUseException(format(
-                        "Estado de código %d não pode ser removido, pois está em uso", id));
-            }
-        }
-        throw new MyEntityNotFoundException(format("Estado de código %d não encontrado", id));
+        estadoRepository.findById(id).ifPresentOrElse(
+                estado -> {
+                    try {
+                        estadoRepository.delete(estado);
+                        estadoRepository.flush();
+                    } catch (DataIntegrityViolationException | PersistenceException e) {
+                        throw new EntityInUseException(format(
+                                "Estado de código %d não pode ser removido, pois está em uso", id));
+                    }
+                },
+                () -> {
+                    throw new MyEntityNotFoundException(format("Estado de código %d não encontrado", id));
+                }
+        );
     }
 
-    private Estado getEstadoAtualOrNull(Long id) {
-        return estadoRepository.buscarEstado(id);
+    private Estado getOrElseThrow(Long id) {
+        return estadoRepository.findById(id).orElseThrow(() -> new MyEntityNotFoundException(
+                format("Estado de código %d não encontrado", id)));
     }
 }

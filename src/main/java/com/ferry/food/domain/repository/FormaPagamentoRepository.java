@@ -1,13 +1,7 @@
 package com.ferry.food.domain.repository;
 
 import com.ferry.food.domain.model.FormaPagamento;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface FormaPagamentoRepository {
-    List<FormaPagamento> listarFormasPagamento();
-    FormaPagamento buscarFormaPagamento(Long id);
-    FormaPagamento adicionarFormaPagamento(FormaPagamento formaPagamento);
-    void removerFormaPagamento(Long id);
-    FormaPagamento atualizarFormaPagamento(FormaPagamento formaPagamento, Long id);
+public interface FormaPagamentoRepository extends JpaRepository<FormaPagamento, Long> {
 }

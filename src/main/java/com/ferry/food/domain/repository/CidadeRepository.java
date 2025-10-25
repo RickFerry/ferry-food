@@ -1,13 +1,7 @@
 package com.ferry.food.domain.repository;
 
 import com.ferry.food.domain.model.Cidade;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface CidadeRepository {
-    List<Cidade> listarCidades();
-    Cidade buscarCidade(Long id);
-    Cidade adicionarCidade(Cidade cidade);
-    void removerCidade(Long id);
-    Cidade atualizarCidade(Cidade cidade, Long id);
+public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 }
