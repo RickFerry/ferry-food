@@ -21,3 +21,9 @@ INSERT INTO estado (id, nome) VALUES (3, 'Minas Gerais');
 INSERT INTO cidade (id, nome, estado_id) VALUES (1, 'São Paulo', 1);
 INSERT INTO cidade (id, nome, estado_id) VALUES (2, 'Rio de Janeiro', 2);
 INSERT INTO cidade (id, nome, estado_id) VALUES (3, 'Belo Horizonte', 3);
+
+INSERT INTO restaurante_formas_pagamento (restaurante_id, forma_pagamento_id) VALUES (1, 1);
+INSERT INTO restaurante_formas_pagamento (restaurante_id, forma_pagamento_id) VALUES (1, 2);
+INSERT INTO restaurante_formas_pagamento (restaurante_id, forma_pagamento_id) VALUES (2, 2);
+INSERT INTO restaurante_formas_pagamento (restaurante_id, forma_pagamento_id) VALUES (3, 1);
+INSERT INTO restaurante_formas_pagamento (restaurante_id, forma_pagamento_id) VALUES (3, 3)

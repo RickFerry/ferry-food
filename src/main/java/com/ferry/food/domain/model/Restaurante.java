@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,4 +25,12 @@ public class Restaurante {
 
     @ManyToOne
     private Cozinha cozinha;
+
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "restaurante_formasPagamento",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "formaPagamento_id"))
+    private Set<FormaPagamento> formasPagamento = new LinkedHashSet<>();
+
 }
