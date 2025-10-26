@@ -60,10 +60,12 @@ public class RestauranteService {
 
         if (restaurante.getCozinha() != null && restaurante.getCozinha().getId() != null) {
             Cozinha cozinha = cozinhaService.getCozinhaOrElseThrow(restaurante.getCozinha().getId());
-            copyProperties(restaurante, restauranteAtual, "id", "cozinha");
+            copyProperties(restaurante, restauranteAtual,
+                    "id", "cozinha", "formasPagamento", "endereco", "dataCadastro");
             restauranteAtual.setCozinha(cozinha);
         } else {
-            copyProperties(restaurante, restauranteAtual, "id", "cozinha");
+            copyProperties(restaurante, restauranteAtual,
+                    "id", "cozinha", "formasPagamento", "endereco", "dataCadastro");
         }
 
         return restauranteRepository.saveAndFlush(restauranteAtual);

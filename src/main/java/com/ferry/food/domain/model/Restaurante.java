@@ -1,9 +1,13 @@
 package com.ferry.food.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -26,11 +30,23 @@ public class Restaurante {
     @ManyToOne
     private Cozinha cozinha;
 
-    @ToString.Exclude
+    @Embedded
+    @JsonIgnore
+    private Endereco endereco;
+
+    @CreationTimestamp
+    @Column(nullable = false, columnDefinition = "datetime")
+    private LocalDateTime dataCadastro;
+
+    @UpdateTimestamp
+    @Column(nullable = false, columnDefinition = "datetime")
+    private LocalDateTime dataAtualizacao;
+
+    @JsonIgnore
     @ManyToMany
+    @ToString.Exclude
     @JoinTable(name = "restaurante_formasPagamento",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "formaPagamento_id"))
     private Set<FormaPagamento> formasPagamento = new LinkedHashSet<>();
-
 }
