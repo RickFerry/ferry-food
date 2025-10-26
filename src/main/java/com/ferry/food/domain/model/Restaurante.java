@@ -42,6 +42,10 @@ public class Restaurante {
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDateTime dataAtualizacao;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "restaurante", orphanRemoval = true)
+    private Set<Produto> produtos = new LinkedHashSet<>();
+
     @JsonIgnore
     @ManyToMany
     @ToString.Exclude
