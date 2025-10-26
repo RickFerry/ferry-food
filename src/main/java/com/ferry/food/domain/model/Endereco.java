@@ -3,6 +3,7 @@ package com.ferry.food.domain.model;
 import lombok.*;
 
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -21,7 +22,7 @@ public class Endereco {
     private String bairro;
     private String cep;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;

@@ -27,7 +27,8 @@ public class Restaurante {
     private String nome;
     private BigDecimal taxaFrete;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cozinha cozinha;
 
     @Embedded
@@ -42,6 +43,7 @@ public class Restaurante {
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDateTime dataAtualizacao;
 
+    @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "restaurante", orphanRemoval = true)
     private Set<Produto> produtos = new LinkedHashSet<>();
