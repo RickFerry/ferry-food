@@ -34,6 +34,17 @@ public class RestauranteController {
         }
     }
 
+    @GetMapping("/com-frete-gratis")
+    public ResponseEntity<List<Restaurante>> listarComFreteGratis(@RequestParam(required = false) String nome) {
+        List<Restaurante> restaurantes = restauranteService.listarComFreteGratis(nome);
+        return ResponseEntity.ok(restaurantes);
+    }
+
+    @GetMapping("/find-first")
+    public ResponseEntity<Restaurante> findFirst() {
+        return ResponseEntity.ok(restauranteService.findFirst());
+    }
+
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody Restaurante restaurante, UriComponentsBuilder uriBuilder) {
         try {
