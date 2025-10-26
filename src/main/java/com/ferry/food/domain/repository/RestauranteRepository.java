@@ -1,8 +1,8 @@
 package com.ferry.food.domain.repository;
 
 import com.ferry.food.domain.model.Restaurante;
-import com.ferry.food.domain.repository.impl.RestauranteRespositoryQueries;
+import com.ferry.food.domain.repository.impl.RestauranteRepositoryQueries;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRespositoryQueries {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
 }

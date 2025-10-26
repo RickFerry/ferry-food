@@ -1,7 +1,6 @@
 package com.ferry.food.domain.repository.impl;
 
 import com.ferry.food.domain.model.Restaurante;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,11 +9,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
-public class RestauranteRespositoryImpl implements RestauranteRespositoryQueries {
+public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
     @PersistenceContext
-    private final EntityManager em;
+    private EntityManager em;
 
     @Override
     public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
