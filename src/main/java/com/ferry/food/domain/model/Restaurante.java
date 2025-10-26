@@ -27,9 +27,6 @@ public class Restaurante {
     private String nome;
     private BigDecimal taxaFrete;
 
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Cozinha cozinha;
 
     @Embedded
     @JsonIgnore
@@ -42,6 +39,10 @@ public class Restaurante {
     @UpdateTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
     private LocalDateTime dataAtualizacao;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cozinha cozinha;
 
     @JsonIgnore
     @ToString.Exclude
