@@ -11,7 +11,7 @@ public class RestauranteSpecFactory {
                 criteriaBuilder.equal(root.get("taxaFrete"), 0);
     }
 
-    public static Specification<Restaurante> freteGratisNomeSemelhante(String nome) {
+    public static Specification<Restaurante> nomeSemelhante(String nome) {
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("nome"), "%" + nome + "%");
     }

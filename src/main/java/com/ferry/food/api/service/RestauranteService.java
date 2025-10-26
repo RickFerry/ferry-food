@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.ferry.food.domain.repository.spec.RestauranteSpecFactory.comFreteGratis;
-import static com.ferry.food.domain.repository.spec.RestauranteSpecFactory.freteGratisNomeSemelhante;
+import static com.ferry.food.domain.repository.spec.RestauranteSpecFactory.nomeSemelhante;
 import static java.lang.String.format;
 import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.util.ReflectionUtils.*;
@@ -33,7 +33,7 @@ public class RestauranteService {
 
     @Transactional(readOnly = true)
     public List<Restaurante> listarComFreteGratis(String nome) {
-        return restauranteRepository.findAll(comFreteGratis().and(freteGratisNomeSemelhante(nome)));
+        return restauranteRepository.findAll(comFreteGratis().and(nomeSemelhante(nome)));
     }
 
     @Transactional(readOnly = true)
