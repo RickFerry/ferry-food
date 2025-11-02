@@ -133,3 +133,56 @@ ALTER TABLE usuarios_grupos
 
 ALTER TABLE usuario
     ADD CONSTRAINT uc_usuario_email UNIQUE (email);
+
+CREATE TABLE pedido
+(
+    id                 BIGINT AUTO_INCREMENT NOT NULL,
+    subtotal           DECIMAL               NULL,
+    taxa_frete         DECIMAL               NULL,
+    valor_total        DECIMAL               NULL,
+    status             VARCHAR(255)          NULL,
+    data_criacao       datetime              NULL,
+    data_confirmacao   datetime              NULL,
+    data_cancelamento  datetime              NULL,
+    data_entrega       datetime              NULL,
+    forma_pagamento_id BIGINT                NOT NULL,
+    restaurante_id     BIGINT                NOT NULL,
+    cliente_id         BIGINT                NOT NULL,
+    logradouro         VARCHAR(255)          NULL,
+    numero             VARCHAR(255)          NULL,
+    complemento        VARCHAR(255)          NULL,
+    bairro             VARCHAR(255)          NULL,
+    cep                VARCHAR(255)          NULL,
+    cidade_id          BIGINT                NULL,
+    CONSTRAINT pk_pedido PRIMARY KEY (id)
+);
+
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_CIDADE FOREIGN KEY (cidade_id) REFERENCES cidade (id);
+
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_CLIENTE FOREIGN KEY (cliente_id) REFERENCES usuario (id);
+
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_FORMA_PAGAMENTO FOREIGN KEY (forma_pagamento_id) REFERENCES forma_pagamento (id);
+
+ALTER TABLE pedido
+    ADD CONSTRAINT FK_PEDIDO_ON_RESTAURANTE FOREIGN KEY (restaurante_id) REFERENCES restaurante (id);
+
+CREATE TABLE itens_pedido
+(
+    id             BIGINT AUTO_INCREMENT NOT NULL,
+    preco_unitario DECIMAL               NULL,
+    preco_total    DECIMAL               NULL,
+    quantidade     INT                   NULL,
+    observacao     VARCHAR(255)          NULL,
+    pedido_id      BIGINT                NOT NULL,
+    produto_id     BIGINT                NOT NULL,
+    CONSTRAINT pk_itens_pedido PRIMARY KEY (id)
+);
+
+ALTER TABLE itens_pedido
+    ADD CONSTRAINT FK_ITENS_PEDIDO_ON_PEDIDO FOREIGN KEY (pedido_id) REFERENCES pedido (id);
+
+ALTER TABLE itens_pedido
+    ADD CONSTRAINT FK_ITENS_PEDIDO_ON_PRODUTO FOREIGN KEY (produto_id) REFERENCES produto (id);
