@@ -1,6 +1,10 @@
 package com.ferry.food.domain.exception;
 
-public class EntityInUseException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.CONFLICT)
+public class EntityInUseException extends BusinessEception {
     public EntityInUseException(String message) {
         super(message);
     }
