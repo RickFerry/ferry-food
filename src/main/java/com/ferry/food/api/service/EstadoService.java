@@ -1,7 +1,7 @@
 package com.ferry.food.api.service;
 
 import com.ferry.food.domain.exception.EntityInUseException;
-import com.ferry.food.domain.exception.MyEntityNotFoundException;
+import com.ferry.food.domain.exception.StateNotFoundException;
 import com.ferry.food.domain.model.Estado;
 import com.ferry.food.domain.repository.EstadoRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,13 +60,12 @@ public class EstadoService {
                     }
                 },
                 () -> {
-                    throw new MyEntityNotFoundException(format("Estado de código %d não encontrado", id));
+                    throw new StateNotFoundException(id);
                 }
         );
     }
 
     private Estado getOrElseThrow(Long id) {
-        return estadoRepository.findById(id).orElseThrow(() -> new MyEntityNotFoundException(
-                format("Estado de código %d não encontrado", id)));
+        return estadoRepository.findById(id).orElseThrow(() -> new StateNotFoundException(id));
     }
 }

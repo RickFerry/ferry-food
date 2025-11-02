@@ -1,7 +1,6 @@
 package com.ferry.food.api.controller;
 
 import com.ferry.food.api.service.CidadeService;
-import com.ferry.food.domain.exception.EntityInUseException;
 import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Cidade;
 import lombok.RequiredArgsConstructor;

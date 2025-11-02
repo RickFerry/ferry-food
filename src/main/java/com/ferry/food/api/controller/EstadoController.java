@@ -1,11 +1,8 @@
 package com.ferry.food.api.controller;
 
 import com.ferry.food.api.service.EstadoService;
-import com.ferry.food.domain.exception.EntityInUseException;
-import com.ferry.food.domain.exception.MyEntityNotFoundException;
 import com.ferry.food.domain.model.Estado;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,13 +21,8 @@ public class EstadoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-        try {
-            Estado estado = estadoService.buscarPorId(id);
-            return ResponseEntity.ok(estado);
-        } catch (MyEntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    public ResponseEntity<Estado> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(estadoService.buscarPorId(id));
     }
 
     @PostMapping
@@ -43,24 +35,13 @@ public class EstadoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Estado estado) {
-        try {
-            Estado estadoAtualizado = estadoService.atualizar(id, estado);
-            return ResponseEntity.ok(estadoAtualizado);
-        } catch (MyEntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    public ResponseEntity<Estado> atualizar(@PathVariable Long id, @RequestBody Estado estado) {
+        return ResponseEntity.ok(estadoService.atualizar(id, estado));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id) {
-        try {
-            estadoService.deletar(id);
-            return ResponseEntity.noContent().build();
-        } catch (MyEntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (EntityInUseException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+        estadoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
