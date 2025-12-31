@@ -36,8 +36,7 @@ public class RestauranteController {
 
     @GetMapping("/com-frete-gratis")
     public ResponseEntity<List<Restaurante>> listarComFreteGratis(@RequestParam(required = false) String nome) {
-        List<Restaurante> restaurantes = restauranteService.listarComFreteGratis(nome);
-        return ResponseEntity.ok(restaurantes);
+        return ResponseEntity.ok(restauranteService.listarComFreteGratis(nome));
     }
 
     @GetMapping("/find-first")
