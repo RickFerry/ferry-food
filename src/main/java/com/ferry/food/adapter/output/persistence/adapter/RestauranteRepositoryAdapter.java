@@ -60,7 +60,9 @@ public class RestauranteRepositoryAdapter implements RestauranteRepositoryPort {
 
     @Override
     public Restaurante obterPrimeiro() {
-        return mapper.toDomainEntity(jpaRepository.findFirstRestaurante());
+        return jpaRepository.findFirstRestaurante()
+            .map(mapper::toDomainEntity)
+            .orElse(null);
     }
 
     @Override

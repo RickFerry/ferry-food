@@ -35,7 +35,7 @@ public class PedidoJpaMapper {
                 jpaEntity.endereco.complemento,
                 jpaEntity.endereco.bairro,
                 jpaEntity.endereco.cep,
-                jpaEntity.endereco.cidadeId
+                jpaEntity.cidadeId
             );
         }
         
@@ -88,13 +88,13 @@ public class PedidoJpaMapper {
         }
         
         if (domainEntity.getEndereco() != null) {
+            entity.cidadeId = domainEntity.getEndereco().getCidadeId();
             entity.endereco = new com.ferry.food.adapter.output.persistence.entity.EnderecoEmbeddable();
             entity.endereco.logradouro = domainEntity.getEndereco().getLogradouro();
             entity.endereco.numero = domainEntity.getEndereco().getNumero();
             entity.endereco.complemento = domainEntity.getEndereco().getComplemento();
             entity.endereco.bairro = domainEntity.getEndereco().getBairro();
             entity.endereco.cep = domainEntity.getEndereco().getCep();
-            entity.endereco.cidadeId = domainEntity.getEndereco().getCidadeId();
         }
         
         return entity;

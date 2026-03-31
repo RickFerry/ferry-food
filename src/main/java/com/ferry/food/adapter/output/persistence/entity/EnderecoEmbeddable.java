@@ -26,7 +26,4 @@ public class EnderecoEmbeddable {
 
     @Column(name = "cep")
     public String cep;
-
-    @Column(name = "cidade_id")
-    public Long cidadeId;
 }

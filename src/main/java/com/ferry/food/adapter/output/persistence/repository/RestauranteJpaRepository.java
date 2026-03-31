@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RestauranteJpaRepository extends JpaRepository<RestauranteJpaEntity, Long> {
@@ -15,6 +16,6 @@ public interface RestauranteJpaRepository extends JpaRepository<RestauranteJpaEn
     @Query("SELECT r FROM RestauranteJpaEntity r WHERE r.nome LIKE %:nome% AND r.taxaFrete = 0")
     List<RestauranteJpaEntity> findWithFreeShippingContainingName(String nome);
 
-    @Query("SELECT r FROM RestauranteJpaEntity r ORDER BY r.id ASC LIMIT 1")
-    RestauranteJpaEntity findFirstRestaurante();
+    @Query("SELECT r FROM RestauranteJpaEntity r ORDER BY r.id ASC")
+    Optional<RestauranteJpaEntity> findFirstRestaurante();
 }

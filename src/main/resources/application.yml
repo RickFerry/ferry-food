@@ -19,7 +19,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/zendb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC}
     username: root
-    password: root
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
     driver-class-name: com.mysql.jdbc.Driver
     initialization-mode: always
     hikari:

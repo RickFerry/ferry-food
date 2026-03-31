@@ -28,7 +28,7 @@ public class RestauranteJpaMapper {
             jpaEntity.endereco.complemento,
             jpaEntity.endereco.bairro,
             jpaEntity.endereco.cep,
-            jpaEntity.endereco.cidadeId,
+            jpaEntity.cidadeId,
             cozinha,
             jpaEntity.dataCadastro,
             jpaEntity.dataAtualizacao
@@ -58,7 +58,6 @@ public class RestauranteJpaMapper {
             entity.endereco.complemento = domainEntity.getEndereco().getComplemento();
             entity.endereco.bairro = domainEntity.getEndereco().getBairro();
             entity.endereco.cep = domainEntity.getEndereco().getCep();
-            entity.endereco.cidadeId = domainEntity.getEndereco().getCidadeId();
         }
         
         return entity;

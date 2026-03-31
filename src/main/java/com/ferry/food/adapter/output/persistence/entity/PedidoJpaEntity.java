@@ -55,6 +55,9 @@ public class PedidoJpaEntity {
     @Column(name = "cliente_id", nullable = false)
     public Long clienteId;
 
+    @Column(name = "cidade_id")
+    public Long cidadeId;
+
     @Embedded
     public EnderecoEmbeddable endereco;
 }
