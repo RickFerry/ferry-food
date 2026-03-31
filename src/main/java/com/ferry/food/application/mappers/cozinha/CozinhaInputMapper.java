@@ -8,11 +8,28 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface CozinhaInputMapper {
+public abstract class CozinhaInputMapper {
     
-    Cozinha toDomain(CriarCozinhaDTO dto);
+    public Cozinha toDomain(CriarCozinhaDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        return Cozinha.criarNova(dto.getNome());
+    }
     
-    Cozinha toDomain(AtualizarCozinhaDTO dto);
+    public Cozinha toDomain(AtualizarCozinhaDTO dto) {
+        // For updates, we expect the ID to be available from the service layer context
+        // This method should rarely be called directly; atualizarDomainAPartirDeDTO is preferred
+        if (dto == null) {
+            return null;
+        }
+        return Cozinha.criarNova(dto.getNome());
+    }
     
-    void atualizarDomainAPartirDeDTO(AtualizarCozinhaDTO dto, @MappingTarget Cozinha cozinha);
+    public void atualizarDomainAPartirDeDTO(AtualizarCozinhaDTO dto, @MappingTarget Cozinha cozinha) {
+        if (dto == null || cozinha == null) {
+            return;
+        }
+        cozinha.atualizarNome(dto.getNome());
+    }
 }

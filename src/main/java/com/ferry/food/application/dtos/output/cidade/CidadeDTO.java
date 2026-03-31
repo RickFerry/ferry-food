@@ -12,4 +12,12 @@ public class CidadeDTO {
     private Long id;
     private String nome;
     private EstadoDTO estado;
+
+    public Long id() {
+        return this.id;
+    }
+
+    public String nome() {
+        return this.nome;
+    }
 }

@@ -15,16 +15,16 @@ public class Endereco {
     private final Long cidadeId;
 
     public Endereco(String logradouro, String numero, String complemento, String bairro, String cep, Long cidadeId) {
-        if (logradouro == null || logradouro.isBlank()) {
+        if (logradouro == null || logradouro.trim().isEmpty()) {
             throw new ValidationException("Logradouro é obrigatório");
         }
-        if (numero == null || numero.isBlank()) {
+        if (numero == null || numero.trim().isEmpty()) {
             throw new ValidationException("Número é obrigatório");
         }
-        if (bairro == null || bairro.isBlank()) {
+        if (bairro == null || bairro.trim().isEmpty()) {
             throw new ValidationException("Bairro é obrigatório");
         }
-        if (cep == null || cep.isBlank()) {
+        if (cep == null || cep.trim().isEmpty()) {
             throw new ValidationException("CEP é obrigatório");
         }
         if (cidadeId == null || cidadeId <= 0) {
@@ -40,10 +40,10 @@ public class Endereco {
     }
 
     public boolean ehValido() {
-        return logradouro != null && !logradouro.isBlank()
-            && numero != null && !numero.isBlank()
-            && bairro != null && !bairro.isBlank()
-            && cep != null && !cep.isBlank()
+        return logradouro != null && !logradouro.trim().isEmpty()
+            && numero != null && !numero.trim().isEmpty()
+            && bairro != null && !bairro.trim().isEmpty()
+            && cep != null && !cep.trim().isEmpty()
             && cidadeId != null && cidadeId > 0;
     }
 }

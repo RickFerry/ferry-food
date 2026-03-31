@@ -44,20 +44,18 @@ public class CozinhaService {
 
     @Transactional
     public void deletar(Long id) {
-        cozinhaRepository.findById(id).ifPresentOrElse(
-                cozinha -> {
-                    try {
-                        cozinhaRepository.delete(cozinha);
-                        cozinhaRepository.flush();
-                    } catch (DataIntegrityViolationException | PersistenceException e) {
-                        throw new EntityInUseException(format(
-                                "Cozinha de código %d não pode ser removida, pois está em uso", id));
-                    }
-                },
-                () -> {
-                    throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
-                }
-        );
+        java.util.Optional<Cozinha> cozinha = cozinhaRepository.findById(id);
+        if (cozinha.isPresent()) {
+            try {
+                cozinhaRepository.delete(cozinha.get());
+                cozinhaRepository.flush();
+            } catch (DataIntegrityViolationException | PersistenceException e) {
+                throw new EntityInUseException(format(
+                        "Cozinha de código %d não pode ser removida, pois está em uso", id));
+            }
+        } else {
+            throw new MyEntityNotFoundException(format("Cozinha de código %d não encontrada", id));
+        }
     }
 
     public Cozinha getCozinhaOrElseThrow(Long id) {

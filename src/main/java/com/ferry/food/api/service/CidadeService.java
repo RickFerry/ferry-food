@@ -54,13 +54,13 @@ public class CidadeService {
 
     @Transactional
     public void deletar(Long id) {
-        cidadeRepository.findById(id).ifPresentOrElse(
-                cidadeRepository::delete,
-                () -> {
-                    throw new MyEntityNotFoundException(
-                            format(CIDADE_DE_CODIGO_D_NAO_ENCONTRADO, id));
-                }
-        );
+        java.util.Optional<Cidade> cidade = cidadeRepository.findById(id);
+        if (cidade.isPresent()) {
+            cidadeRepository.delete(cidade.get());
+        } else {
+            throw new MyEntityNotFoundException(
+                    format(CIDADE_DE_CODIGO_D_NAO_ENCONTRADO, id));
+        }
     }
 
     private Cidade getOrElseThrow(Long id) {

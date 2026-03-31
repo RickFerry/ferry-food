@@ -10,7 +10,7 @@ public class Nome {
     private final String valor;
 
     public Nome(String valor) {
-        if (valor == null || valor.isBlank()) {
+        if (valor == null || valor.trim().isEmpty()) {
             throw new ValidationException("Nome não pode ser vazio");
         }
         if (valor.length() < 3) {
@@ -23,7 +23,7 @@ public class Nome {
     }
 
     public boolean contemPalavra(String palavra) {
-        if (palavra == null || palavra.isBlank()) {
+        if (palavra == null || palavra.trim().isEmpty()) {
             return false;
         }
         return valor.toLowerCase().contains(palavra.toLowerCase());

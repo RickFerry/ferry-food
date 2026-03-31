@@ -49,20 +49,18 @@ public class EstadoService {
 
     @Transactional
     public void deletar(Long id) {
-        estadoRepository.findById(id).ifPresentOrElse(
-                estado -> {
-                    try {
-                        estadoRepository.delete(estado);
-                        estadoRepository.flush();
-                    } catch (DataIntegrityViolationException | PersistenceException e) {
-                        throw new EntityInUseException(format(
-                                "Estado de código %d não pode ser removido, pois está em uso", id));
-                    }
-                },
-                () -> {
-                    throw new StateNotFoundException(id);
-                }
-        );
+        java.util.Optional<Estado> estado = estadoRepository.findById(id);
+        if (estado.isPresent()) {
+            try {
+                estadoRepository.delete(estado.get());
+                estadoRepository.flush();
+            } catch (DataIntegrityViolationException | PersistenceException e) {
+                throw new EntityInUseException(format(
+                        "Estado de código %d não pode ser removido, pois está em uso", id));
+            }
+        } else {
+            throw new StateNotFoundException(id);
+        }
     }
 
     private Estado getOrElseThrow(Long id) {

@@ -1,5 +1,6 @@
 package com.ferry.food.domain.domainservices;
 
+import com.ferry.food.domain.entities.Cozinha;
 import com.ferry.food.domain.entities.Restaurante;
 import com.ferry.food.domain.exceptions.BusinessException;
 import org.springframework.stereotype.Component;
@@ -7,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidadorRestaurante {
 
-    public void validarParaCriacao(String nome, Restaurante cozinhaRecuperada) {
-        if (nome == null || nome.isBlank()) {
+    public void validarParaCriacao(String nome, Cozinha cozinhaRecuperada) {
+        if (nome == null || nome.trim().isEmpty()) {
             throw new BusinessException("Nome do restaurante é obrigatório");
         }
 

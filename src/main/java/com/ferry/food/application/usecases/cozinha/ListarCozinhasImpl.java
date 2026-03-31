@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +24,6 @@ public class ListarCozinhasImpl implements ListarCozinhasUseCase {
         return cozinhaRepository.listarTodas()
             .stream()
             .map(outputMapper::toDTO)
-            .toList();
+            .collect(Collectors.toList());
     }
 }

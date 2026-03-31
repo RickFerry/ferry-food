@@ -10,4 +10,12 @@ import lombok.NoArgsConstructor;
 public class CozinhaDTO {
     private Long id;
     private String nome;
+
+    public Long id() {
+        return this.id;
+    }
+
+    public String nome() {
+        return this.nome;
+    }
 }

@@ -21,4 +21,12 @@ public class RestauranteDTO {
     private String cep;
     private CidadeDTO cidade;
     private CozinhaDTO cozinha;
+
+    public Long id() {
+        return this.id;
+    }
+
+    public String nome() {
+        return this.nome;
+    }
 }
