@@ -1,12 +1,11 @@
 package com.ferry.food;
 
-import com.ferry.food.domain.repository.impl.CustomJpaRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(repositoryBaseClass = CustomJpaRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = "com.ferry.food.adapter.output.persistence.repository")
 public class Application {
 
     public static void main(String[] args) {
