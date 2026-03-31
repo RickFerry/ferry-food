@@ -1,11 +1,15 @@
 package com.ferry.food.domain.valueobjects;
 
 import com.ferry.food.domain.exceptions.ValidationException;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-public record Nome(
-    String valor
-) {
-    public Nome {
+@Getter
+@EqualsAndHashCode
+public class Nome {
+    private final String valor;
+
+    public Nome(String valor) {
         if (valor == null || valor.isBlank()) {
             throw new ValidationException("Nome não pode ser vazio");
         }
@@ -15,6 +19,7 @@ public record Nome(
         if (valor.length() > 255) {
             throw new ValidationException("Nome não pode exceder 255 caracteres");
         }
+        this.valor = valor;
     }
 
     public boolean contemPalavra(String palavra) {

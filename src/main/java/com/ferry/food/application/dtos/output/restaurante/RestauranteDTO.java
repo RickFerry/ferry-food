@@ -2,17 +2,23 @@ package com.ferry.food.application.dtos.output.restaurante;
 
 import com.ferry.food.application.dtos.output.cozinha.CozinhaDTO;
 import com.ferry.food.application.dtos.output.cidade.CidadeDTO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
-public record RestauranteDTO(
-    Long id,
-    String nome,
-    BigDecimal taxaFrete,
-    String logradouro,
-    String numero,
-    String complemento,
-    String bairro,
-    String cep,
-    CidadeDTO cidade,
-    CozinhaDTO cozinha
-) {}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestauranteDTO {
+    private Long id;
+    private String nome;
+    private BigDecimal taxaFrete;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+    private String cep;
+    private CidadeDTO cidade;
+    private CozinhaDTO cozinha;
+}

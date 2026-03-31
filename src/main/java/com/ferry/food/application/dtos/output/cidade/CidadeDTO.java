@@ -1,9 +1,15 @@
 package com.ferry.food.application.dtos.output.cidade;
 
 import com.ferry.food.application.dtos.output.estado.EstadoDTO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record CidadeDTO(
-    Long id,
-    String nome,
-    EstadoDTO estado
-) {}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CidadeDTO {
+    private Long id;
+    private String nome;
+    private EstadoDTO estado;
+}

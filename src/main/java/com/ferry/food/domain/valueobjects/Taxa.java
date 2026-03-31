@@ -1,18 +1,23 @@
 package com.ferry.food.domain.valueobjects;
 
 import com.ferry.food.domain.exceptions.ValidationException;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import java.math.BigDecimal;
 
-public record Taxa(
-    BigDecimal valor
-) {
-    public Taxa {
+@Getter
+@EqualsAndHashCode
+public class Taxa {
+    private final BigDecimal valor;
+
+    public Taxa(BigDecimal valor) {
         if (valor == null) {
             throw new ValidationException("Valor da taxa não pode ser nulo");
         }
         if (valor.compareTo(BigDecimal.ZERO) < 0) {
             throw new ValidationException("Valor da taxa não pode ser negativo");
         }
+        this.valor = valor;
     }
 
     public Taxa somar(Taxa outra) {
