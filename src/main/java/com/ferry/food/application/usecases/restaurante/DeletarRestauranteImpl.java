@@ -23,7 +23,7 @@ public class DeletarRestauranteImpl implements DeletarRestauranteUseCase {
         Restaurante restaurante = restauranteRepository.obterPorId(id)
             .orElseThrow(() -> EntityNotFoundException.forEntity("Restaurante", id));
         
-        validador.validarParaDeleção(restaurante);
+        validador.validarParaDelecao(restaurante);
         
         try {
             restauranteRepository.deletar(id);

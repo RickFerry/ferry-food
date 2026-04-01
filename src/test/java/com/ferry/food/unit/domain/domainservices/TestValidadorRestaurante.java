@@ -76,21 +76,21 @@ class TestValidadorRestaurante {
 
     @Test
     @DisplayName("should throw BusinessException when Restaurante is null for deletion")
-    void testValidarParaDeleção_ComRestauranteNulo_DeveLançarException() {
+    void testValidarParaDelecao_ComRestauranteNulo_DeveLançarException() {
         // Act & Assert
-        assertThatThrownBy(() -> validador.validarParaDeleção(null))
+        assertThatThrownBy(() -> validador.validarParaDelecao(null))
             .isInstanceOf(BusinessException.class)
             .hasMessageContaining("Restaurante não pode ser nulo para deleção");
     }
 
     @Test
     @DisplayName("should validate deletion with valid Restaurante")
-    void testValidarParaDeleção_ComRestauranteValido() {
+    void testValidarParaDelecao_ComRestauranteValido() {
         // Arrange
         Restaurante restaurante = RestauranteFixture.umRestauranteValido(CozinhaFixture.umaCozinhaValida());
 
         // Act & Assert - should not throw
-        assertThatCode(() -> validador.validarParaDeleção(restaurante))
+        assertThatCode(() -> validador.validarParaDelecao(restaurante))
             .doesNotThrowAnyException();
     }
 }

@@ -34,7 +34,7 @@ public class ValidadorRestaurante {
         }
     }
 
-    public void validarParaDeleção(Restaurante restaurante) {
+    public void validarParaDelecao(Restaurante restaurante) {
         if (restaurante == null) {
             throw new BusinessException("Restaurante não pode ser nulo para deleção");
         }
