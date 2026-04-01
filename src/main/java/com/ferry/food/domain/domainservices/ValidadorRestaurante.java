@@ -3,9 +3,7 @@ package com.ferry.food.domain.domainservices;
 import com.ferry.food.domain.entities.Cozinha;
 import com.ferry.food.domain.entities.Restaurante;
 import com.ferry.food.domain.exceptions.BusinessException;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ValidadorRestaurante {
 
     public void validarParaCriacao(String nome, Cozinha cozinhaRecuperada) {
