@@ -114,4 +114,105 @@ openspec archive
 | `opencode run "/opsx:explore [dúvida]"` | Faz a IA analisar o código e sugerir abordagens arquiteturais sem criar arquivos. |
 ```
 
-Este modelo está direto ao ponto e focado na operação. Você pode expandir as seções de contexto tecnológico diretamente no `config.yaml` da sua aplicação sempre que for preciso introduzir um padrão novo no ambiente de trabalho. Se precisar de mais algum ajuste ou comando específico para integrar em algum pipeline automatizado de CI/CD, é só falar!
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+```markdown
+# 🤖 Guia Definitivo: Fluxo Híbrido OpenSpec + opencode (Windows/PowerShell)
+
+Este documento estabelece o fluxo de trabalho oficial para desenvolvimento assistido por Inteligência Artificial no projeto. Ele mescla a governança do **OpenSpec** (via linha de comando) com a velocidade de execução do **opencode** (via interface de terminal - TUI).
+
+O objetivo é garantir a adesão à arquitetura do projeto (ex: Java 21, Spring Boot, Arquitetura Hexagonal), manter a alta qualidade do código e assegurar **privacidade absoluta dos dados corporativos**.
+
+---
+
+## 🔒 1. Trava de Segurança e Privacidade (Obrigatório)
+
+Antes de qualquer interação, blinde o seu ambiente local contra vazamento de dados.
+
+### 1.1 Desativar Telemetria do OpenSpec
+No seu PowerShell, adicione a variável de ambiente ao seu perfil para que ela seja carregada automaticamente em todas as sessões. Rode este comando uma única vez:
+
+```powershell
+if (!(Test-Path -Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force }
+Add-Content -Path $PROFILE -Value '$env:OPENSPEC_TELEMETRY="0"'
+```
+*(Reinicie o terminal após executar).*
+
+### 1.2 Bloquear Compartilhamento no opencode
+Na raiz do repositório, crie o arquivo `opencode.json` para bloquear o upload de sessões. Este arquivo **deve ser commitado** no repositório.
+
+```powershell
+New-Item -Path "opencode.json" -ItemType File
+```
+Insira o seguinte conteúdo no arquivo:
+```json
+{
+  "$schema": "[https://opencode.ai/config.json](https://opencode.ai/config.json)",
+  "share": "disabled"
+}
+```
+
+---
+
+## 🏗️ 2. Inicialização do Projeto
+
+Sempre que clonar o repositório pela primeira vez, inicialize os motores:
+
+**No PowerShell (Raiz do projeto):**
+```powershell
+# 1. Configura as pastas e o config.yaml do OpenSpec
+openspec init
+
+# 2. Gera o AGENTS.md para o opencode entender o contexto
+opencode run "/init"
+```
+
+---
+
+## 🚀 3. O Fluxo de Trabalho Híbrido (O Ciclo de Vida da Feature)
+
+Para máxima eficiência, divida o terminal do seu IDE (VS Code, IntelliJ, etc.) em dois painéis:
+* **Terminal A:** PowerShell nativo (Auditor).
+* **Terminal B:** TUI do opencode (Executor). Inicie digitando `opencode`.
+
+### Passo 1: Planejamento Assistido
+No **Terminal B (TUI do opencode)**, peça para a IA montar a estrutura da nova funcionalidade.
+> `/opsx:propose implementar [NOME_DA_FUNCIONALIDADE] seguindo a Arquitetura Hexagonal`
+
+### Passo 2: Validação e Refinamento Humano
+No **Terminal A (PowerShell)**, audite os arquivos gerados contra as regras do projeto:
+```powershell
+openspec validate
+```
+* Se o resultado for `0 failed`, abra o `design.md` e o `tasks.md` gerados em `openspec/changes/...` no seu editor.
+* **Revisão do Especialista:** Ajuste nomes de *Ports*, *Adapters*, quebre tarefas muito grandes ou adicione testes específicos no checklist. Salve os arquivos.
+
+### Passo 3: Higiene de Contexto e Execução
+No **Terminal B (TUI do opencode)**, limpe o histórico longo do planejamento e inicie a codificação com a mente da IA "fresca".
+> `/new`
+> `/opsx:apply`
+
+### Passo 4: Auditoria de Qualidade
+No **Terminal B (TUI do opencode)**, cruze o código Java recém-gerado com os cenários de teste definidos na documentação.
+> `/opsx:verify`
+
+### Passo 5: Fechamento (Arquivamento)
+No **Terminal A (PowerShell)**, após o código estar validado e funcionando, consolide as especificações na Fonte da Verdade do projeto e limpe a área de trabalho.
+```powershell
+openspec archive
+```
+
+A funcionalidade está pronta para o `git commit` e abertura do Pull Request! ✅
+
+---
+
+## 📌 Cheatsheet Rápido
+
+| Ação | Onde Fazer | Comando / Ação |
+| :--- | :--- | :--- |
+| **Ver o andamento** | Terminal A (PowerShell) | `openspec status` |
+| **Visualizar painel** | Terminal A (PowerShell) | `openspec view` |
+| **Limpar a IA** | Terminal B (TUI) | `/new` (ou `Ctrl+x` e `n`) |
+| **Copiar texto da IA** | Terminal B (TUI) | Selecionar com mouse (ou `Ctrl+x` e `y`) |
+| **Tirar dúvidas soltas** | Terminal B (TUI) | `/opsx:explore [sua dúvida técnica]` |
+```
